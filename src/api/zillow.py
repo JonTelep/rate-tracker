@@ -1,7 +1,6 @@
 import requests
-
-
-
+import os
+cwd = os.getcwd()
 
 def get_alpha_vantage_data():
     """
@@ -10,13 +9,13 @@ def get_alpha_vantage_data():
     
     hostname = "https://mortgageapi.zillow.com/getRates"
     params = {
-        "partnerId": "X1-ZWz19s19v6nidz_84h5s",
-        
+        "partnerId": os.getenv("ZILLOW_API_KEY"),
     }
     
     headers = {
-        
+        "Content-Type": "application/json",
+        "Accept": "application/json"        
     }
 
-    response = requests.get(hostname, params=params, headers=headers)
+    response = requests.get(hostname, params=params, headers=headers, timeout=10)
     return response.json()

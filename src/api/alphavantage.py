@@ -11,11 +11,6 @@ def get_ipo_calendar():
         "function": "IPO_CALENDAR",
         "apikey": os.getenv("ALPHA_VANTAGE_API_KEY")
     }
-    response = requests.get(hostname, params=params)
-    file_name = "ipo_calendar.json"
-    with open(file_name, "w") as file:
-        json.dump(response.json(), file)
+    response = requests.get(hostname, params=params, timeout=10)
     return response.json()
-
-
 
